@@ -47,7 +47,7 @@ resource "aws_s3_bucket_object" "upload_origination_default_object" {
   bucket                 = "${local.s3_origination_bucket}"
   content                = "Files uploaded into this directory structure will be processed by the system."
   server_side_encryption = "aws:kms"
-  depends_on             = ["module.customer_s3_bucket"]
+  depends_on             = ["module.origination_s3_bucket"]
 }
 
 resource "aws_s3_bucket_object" "download_origination_default_object" {
@@ -55,7 +55,7 @@ resource "aws_s3_bucket_object" "download_origination_default_object" {
   bucket                 = "${local.s3_origination_bucket}"
   content                = "Files created by the system are placed into this directory structure for download."
   server_side_encryption = "aws:kms"
-  depends_on             = ["module.customer_s3_bucket"]
+  depends_on             = ["module.origination_s3_bucket"]
 }
 
 resource "aws_s3_bucket_object" "upload_insurance_default_object" {
@@ -63,7 +63,7 @@ resource "aws_s3_bucket_object" "upload_insurance_default_object" {
   bucket                 = "${local.s3_insurance_bucket}"
   content                = "Files uploaded into this directory structure will be processed by the system."
   server_side_encryption = "aws:kms"
-  depends_on             = ["module.customer_s3_bucket"]
+  depends_on             = ["module.insurance_s3_bucket"]
 }
 
 resource "aws_s3_bucket_object" "download_insurance_default_object" {
@@ -71,7 +71,7 @@ resource "aws_s3_bucket_object" "download_insurance_default_object" {
   bucket                 = "${local.s3_insurance_bucket}"
   content                = "Files created by the system are placed into this directory structure for download."
   server_side_encryption = "aws:kms"
-  depends_on             = ["module.customer_s3_bucket"]
+  depends_on             = ["module.insurance_s3_bucket"]
 }
 
 resource "aws_s3_bucket_object" "upload_bank_default_object" {
@@ -79,7 +79,7 @@ resource "aws_s3_bucket_object" "upload_bank_default_object" {
   bucket                 = "${local.s3_bank_bucket}"
   content                = "Files uploaded into this directory structure will be processed by the system."
   server_side_encryption = "aws:kms"
-  depends_on             = ["module.customer_s3_bucket"]
+  depends_on             = ["module.bank_s3_bucket"]
 }
 
 resource "aws_s3_bucket_object" "download_bank_default_object" {
@@ -87,5 +87,5 @@ resource "aws_s3_bucket_object" "download_bank_default_object" {
   bucket                 = "${local.s3_bank_bucket}"
   content                = "Files created by the system are placed into this directory structure for download."
   server_side_encryption = "aws:kms"
-  depends_on             = ["module.customer_s3_bucket"]
+  depends_on             = ["module.bank_s3_bucket"]
 }
