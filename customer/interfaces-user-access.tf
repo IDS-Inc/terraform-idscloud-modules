@@ -7,6 +7,9 @@ data "aws_iam_policy_document" "customer_to_s3_interfaces_bucket" {
 
     resources = [
       "arn:aws:s3:::${local.s3_interfaces_bucket}",
+      "arn:aws:s3:::${local.s3_origination_bucket}",
+      "arn:aws:s3:::${local.s3_insurance_bucket}",
+      "arn:aws:s3:::${local.s3_bank_bucket}",
     ]
   }
 
@@ -17,6 +20,9 @@ data "aws_iam_policy_document" "customer_to_s3_interfaces_bucket" {
 
     resources = [
       "arn:aws:s3:::${local.s3_interfaces_bucket}/*",
+      "arn:aws:s3:::${local.s3_origination_bucket}/*",
+      "arn:aws:s3:::${local.s3_insurance_bucket}/*",
+      "arn:aws:s3:::${local.s3_bank_bucket}/*",
     ]
   }
 
@@ -27,6 +33,9 @@ data "aws_iam_policy_document" "customer_to_s3_interfaces_bucket" {
 
     resources = [
       "arn:aws:s3:::${local.s3_interfaces_bucket}/upload/*",
+      "arn:aws:s3:::${local.s3_origination_bucket}/upload/*",
+      "arn:aws:s3:::${local.s3_insurance_bucket}/upload/*",
+      "arn:aws:s3:::${local.s3_bank_bucket}/upload/*",
     ]
   }
 }

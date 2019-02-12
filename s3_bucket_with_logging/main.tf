@@ -1,7 +1,5 @@
-# TODO: change "configuration_files" and "configuration_files_logs" to "main"
-
 # Configuration logs
-resource "aws_s3_bucket" "configuration_files_logs" {
+resource "aws_s3_bucket" "main_logs" {
   bucket        = "${var.bucket_name}.logs"
   acl           = "log-delivery-write"
   force_destroy = true
@@ -18,11 +16,16 @@ resource "aws_s3_bucket" "configuration_files_logs" {
     expiration {
       expired_object_delete_marker = true
     }
+
   }
+
+  tags = {
+  }
+
 }
 
 # Configurations
-resource "aws_s3_bucket" "configuration_files" {
+resource "aws_s3_bucket" "main" {
   bucket = "${var.bucket_name}"
   acl    = "private"
 
@@ -49,5 +52,8 @@ resource "aws_s3_bucket" "configuration_files" {
     }
   }
 
+  tags = {
+  }
+  
   depends_on = ["aws_s3_bucket.configuration_files"]
 }
