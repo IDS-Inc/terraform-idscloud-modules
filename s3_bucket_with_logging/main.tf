@@ -30,7 +30,7 @@ resource "aws_s3_bucket" "main" {
   acl    = "private"
 
   logging {
-    target_bucket = "${aws_s3_bucket.configuration_files_logs.id}"
+    target_bucket = "${aws_s3_bucket.main_logs.id}"
     target_prefix = "${var.bucket_name}-s3/"
   }
 
@@ -55,5 +55,5 @@ resource "aws_s3_bucket" "main" {
   tags = {
   }
   
-  depends_on = ["aws_s3_bucket.configuration_files"]
+  depends_on = ["aws_s3_bucket.main"]
 }
