@@ -7,11 +7,29 @@ resource "aws_iam_role" "s3sqlbackuprole" {
   provisioner "local-exec" {
     command = "ping 127.0.0.1 -c 11 > nul"
   } 
+
+  tags = {
+    "Name" = "${var.name}-rds-iam-role"
+    "ids:unit" = "devops"
+    "ids:product" = "idscloud"
+    "ids:subproduct" = "RDS"
+    "ids:owner" = "aherrera@idsgrp.com"
+    "ids:env" = "${var.environment_name}"
+  }
 }
 
 resource "aws_db_subnet_group" "default" {
   name       = "${var.name}"
   subnet_ids = ["${var.subnets}"]
+
+  tags = {
+    "Name" = "${var.name}-rds-subnet-group"
+    "ids:unit" = "devops"
+    "ids:product" = "idscloud"
+    "ids:subproduct" = "RDS"
+    "ids:owner" = "aherrera@idsgrp.com"
+    "ids:env" = "${var.environment_name}"
+  }
 }
 
 resource "aws_db_option_group" "default" {
@@ -30,26 +48,47 @@ resource "aws_db_option_group" "default" {
   }
 
   depends_on = [ "aws_iam_role.s3sqlbackuprole" ]
+
+  tags = {
+    "Name" = "${var.name}-rds-options-group"
+    "ids:unit" = "devops"
+    "ids:product" = "idscloud"
+    "ids:subproduct" = "RDS"
+    "ids:owner" = "aherrera@idsgrp.com"
+    "ids:env" = "${var.environment_name}"
+  }
 }
 
 resource "aws_db_instance" "default" {
   allocated_storage         = "${var.storage}"
-  storage_type              = "gp2"
-  storage_encrypted         = "true"
+  backup_retention_period   = "${var.backup_retention_period}"
+  copy_tags_to_snapshot     = "true"
+  db_subnet_group_name      = "${aws_db_subnet_group.default.name}"
   engine                    = "${var.engine}"
   engine_version            = "${var.engine_version}"
+  final_snapshot_identifier = "final-${var.name}"
   identifier_prefix         = "${var.name}-"
   instance_class            = "${var.instance_class}"
-  username                  = "${var.username}"
-  password                  = "${var.password}"
-  backup_retention_period   = "${var.backup_retention_period}"
-  final_snapshot_identifier = "final-${var.name}"
-  db_subnet_group_name      = "${aws_db_subnet_group.default.name}"
-  vpc_security_group_ids    = ["${var.security_groups}"]
+  license_model             = "license-included"
+  monitoring_interval       = "${var.monitoring_interval}"
+  monitoring_role_arn       = "${var.monitoring_role_arn}"
+  multi_az                  = "${var.multi_az}"
   option_group_name         = "${aws_db_option_group.default.name}"
+  password                  = "${var.password}"
+  skip_final_snapshot       = "${var.skip_final_snapshot}"
+  snapshot_identifier       = "${var.restore_snapshot}"
+  storage_encrypted         = "true"
+  storage_type              = "gp2"
   timezone                  = "${var.timezone}"
+  username                  = "${var.username}"
+  vpc_security_group_ids    = ["${var.security_groups}"]
 
-  #  deletion_protection = true
-  multi_az      = "${var.multi_az}"
-  license_model = "license-included"
+  tags = {
+    "Name" = "${var.name}-rds-instance"
+    "ids:unit" = "devops"
+    "ids:product" = "idscloud"
+    "ids:subproduct" = "RDS"
+    "ids:owner" = "aherrera@idsgrp.com"
+    "ids:env" = "${var.environment_name}"
+  }
 }

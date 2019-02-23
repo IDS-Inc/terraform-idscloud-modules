@@ -14,6 +14,14 @@ output "vpc_id" {
   value = "${aws_vpc.main.id}"
 }
 
+output "aws_route53_zone_id" {
+  value = "${aws_route53_zone.main.zone_id}"
+}
+
+output "aws_route53_zone_name" {
+  value = "${aws_route53_zone.main.name}"
+}
+
 output "public_route_table" {
   value = "${aws_route_table.public.id}"
 }
