@@ -62,9 +62,9 @@ resource "aws_launch_configuration" "infolease" {
 # Auto Scaling Group
 resource "aws_autoscaling_group" "infolease" {
   name_prefix               = "${var.customer_name}_IL_"
-  min_size                  = "${var.enable_infolease_servers}"
-  max_size                  = "${var.enable_infolease_servers}"
-  desired_capacity          = "${var.enable_infolease_servers}"
+  min_size                  = "${var.min_infolease_servers}"
+  max_size                  = "${var.max_infolease_servers}"
+  desired_capacity          = "${var.desired_infolease_servers}"
   health_check_grace_period = 300
   health_check_type         = "ELB"                                        # TODO: change to ELB
   launch_configuration      = "${aws_launch_configuration.infolease.name}"
