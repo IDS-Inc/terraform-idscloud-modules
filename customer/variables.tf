@@ -86,8 +86,16 @@ variable "key_name" {
   type = "string"
 }
 
-variable "enable_infolease_servers" {
-  default = true
+variable "min_infolease_servers" {
+  default = 1
+}
+
+variable "max_infolease_servers" {
+  default = 2
+}
+
+variable "desired_infolease_servers" {
+  default = 1
 }
 
 variable "service_dns_zone_name" {
@@ -107,12 +115,28 @@ variable "additional_security_groups" {
   default = []
 }
 
-variable "enable_reporting_servers" {
-  default = true
+variable "min_reporting_servers" {
+  default = 1
 }
 
-variable "enable_rapport_servers" {
-  default = true
+variable "max_reporting_servers" {
+  default = 2
+}
+
+variable "desired_reporting_servers" {
+  default = 1
+}
+
+variable "min_rapport_servers" {
+  default = 1
+}
+
+variable "max_rapport_servers" {
+  default = 2
+}
+
+variable "desired_rapport_servers" {
+  default = 1
 }
 
 variable "log_retention_days_infolease" {
