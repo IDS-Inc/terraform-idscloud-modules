@@ -158,8 +158,9 @@ variable "rapport_version" {
 }
 
 variable "environment" {
-  type    = "string"
-  default = ""
+  type        = "string"
+  default     = "dev"
+  description = "The current environment or `stage` that is being deployed."
 }
 
 variable "asg_suspended_processes" {
@@ -172,10 +173,19 @@ variable "internal_ips" {
   default = ["10.0.0.0/8", "192.168.0.0/16", "172.16.0.0/12"]
 }
 
-data "aws_region" "current" {}
+data "aws_region" "current" {
+}
 
 variable "credstash_reader_arn" {
-  type = "string" }
+  type = "string"
+}
 
 variable "credstash_kms_arn" {
-   type = "string" }
+  type = "string"
+}
+
+variable "namespace" {
+  type        = "string"
+  default     = "idsgrp"
+  description = "The prefix namespace for all things cloud (e.g. idsgrp or ids)"
+}
