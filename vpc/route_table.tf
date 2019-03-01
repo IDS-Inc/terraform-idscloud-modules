@@ -41,7 +41,7 @@ resource "aws_route_table_association" "private" {
 
 # Database route table association
 resource "aws_route_table_association" "database" {
-  count          = "${length(var.availability_zones)}"
+  count          = "2"
   subnet_id      = "${aws_subnet.database.*.id[count.index]}"
   route_table_id = "${aws_route_table.database.id}"
 }

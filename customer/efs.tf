@@ -8,7 +8,7 @@ resource "aws_efs_file_system" "main" {
 }
 
 resource "aws_efs_mount_target" "main" {
-  count = "${length(var.private_subnets)}"
+  count = "3"
 
   file_system_id  = "${aws_efs_file_system.main.id}"
   subnet_id       = "${element(var.private_subnets, count.index)}"
